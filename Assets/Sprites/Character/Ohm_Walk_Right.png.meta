@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 791898e2d9dadca42b293d55168a848b
+guid: 5e897bb7284418c49b6443141a6bb089
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3615008334618449563
-    second: Ohm_Walk_Left_0
+      213: 6742285863171624508
+    second: Ohm_Walk_Right_0
   - first:
-      213: 7287313802295169727
-    second: Ohm_Walk_Left_1
+      213: 6222965520665515031
+    second: Ohm_Walk_Right_1
   - first:
-      213: -3006267246631303033
-    second: Ohm_Walk_Left_2
+      213: 3514072986239562774
+    second: Ohm_Walk_Right_2
   - first:
-      213: 4713161735956577245
-    second: Ohm_Walk_Left_3
+      213: 2761754436610850712
+    second: Ohm_Walk_Right_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 130
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ohm_Walk_Left_0
+      name: Ohm_Walk_Right_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,14 +117,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 569adf2a219e4ddc0800000000000000
-      internalID: -3615008334618449563
+      spriteID: c3e8b783549619d50800000000000000
+      internalID: 6742285863171624508
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ohm_Walk_Left_1
+      name: Ohm_Walk_Right_1
       rect:
         serializedVersion: 2
         x: 160
@@ -138,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb2da981b4db12560800000000000000
-      internalID: 7287313802295169727
+      spriteID: 71495cc9b2a6c5650800000000000000
+      internalID: 6222965520665515031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ohm_Walk_Left_2
+      name: Ohm_Walk_Right_2
       rect:
         serializedVersion: 2
         x: 320
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78846a8fdd79746d0800000000000000
-      internalID: -3006267246631303033
+      spriteID: 614fa9b33ce74c030800000000000000
+      internalID: 3514072986239562774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ohm_Walk_Left_3
+      name: Ohm_Walk_Right_3
       rect:
         serializedVersion: 2
         x: 480
@@ -180,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddbb7a0a0a3886140800000000000000
-      internalID: 4713161735956577245
+      spriteID: 89f7c071709b35620800000000000000
+      internalID: 2761754436610850712
       vertices: []
       indices: 
       edges: []

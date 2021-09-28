@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 4442bf4f3516896468e148fdaf3654eb
+guid: 9535fd8a57425d847aaae46a3b55806e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5188496972905918461
-    second: Mho_Jump_Front_0
+      213: -7176176696954602729
+    second: Ohm_Walk_Back_0
   - first:
-      213: 7291270185677416094
-    second: Mho_Jump_Front_1
-  - first:
-      213: -2967124814589135988
-    second: Mho_Jump_Front_2
-  - first:
-      213: 1177538368574834643
-    second: Mho_Jump_Front_3
+      213: -8432218621444016279
+    second: Ohm_Walk_Back_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +52,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 130
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mho_Jump_Front_0
+      name: Ohm_Walk_Back_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 300d0c33e71cef7b0800000000000000
-      internalID: -5188496972905918461
+      spriteID: 71bb59ca059196c90800000000000000
+      internalID: -7176176696954602729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mho_Jump_Front_1
+      name: Ohm_Walk_Back_1
       rect:
         serializedVersion: 2
         x: 160
@@ -138,50 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e96e2b26a9bcf2560800000000000000
-      internalID: 7291270185677416094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mho_Jump_Front_2
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c83fa2e93b7a2d6d0800000000000000
-      internalID: -2967124814589135988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mho_Jump_Front_3
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d7cb4848e4775010800000000000000
-      internalID: 1177538368574834643
+      spriteID: 9673560f6ddbafa80800000000000000
+      internalID: -8432218621444016279
       vertices: []
       indices: 
       edges: []
