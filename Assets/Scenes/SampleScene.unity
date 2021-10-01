@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 1324301142}
   - component: {fileID: 1324301141}
   - component: {fileID: 1324301143}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mho
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1433,7 +1433,7 @@ GameObject:
   - component: {fileID: 1594650896}
   - component: {fileID: 1594650895}
   - component: {fileID: 1594650897}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Ohm
   m_TagString: Player
   m_Icon: {fileID: 0}
