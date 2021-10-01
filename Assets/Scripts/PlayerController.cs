@@ -2,42 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// PlayerController´Â ÇÃ·¹ÀÌ¾îÀÇ Ä³¸¯ÅÍ·Î¼­ Player °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ Á¦¾î
+// PlayerControllerëŠ” í”Œë ˆì´ì–´ì˜ ìºë¦­í„°ë¡œì„œ Player ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì œì–´
 public class PlayerController : MonoBehaviour
 {
-    public float speed;   // ÀÌµ¿ ¼Ó·Â
-    public string charName;    // Ä³¸¯ÅÍ ÀÌ¸§
+    public float speed;   // ì´ë™ ì†ë ¥
+    public string charName;    // ìºë¦­í„° ì´ë¦„
 
-    private bool isDead = false;    // »ç¸Á »óÅÂ
-    private Rigidbody2D characterRigidbody; // »ç¿ëÇÒ ¸®Áöµå¹Ùµğ ÄÄÆ÷³ÍÆ® º¯¼ö
-    private Animator animator;  // »ç¿ëÇÒ ¾Ö´Ï¸ŞÀÌÅÍ ÄÄÆ÷³ÍÆ® º¯¼ö
+    private bool isDead = false;    // ì‚¬ë§ ìƒíƒœ
+    private Rigidbody2D characterRigidbody; // ì‚¬ìš©í•  ë¦¬ì§€ë“œë°”ë”” ì»´í¬ë„ŒíŠ¸ ë³€ìˆ˜
+    private Animator animator;  // ì‚¬ìš©í•  ì• ë‹ˆë©”ì´í„° ì»´í¬ë„ŒíŠ¸ ë³€ìˆ˜
 
     void Start()
     {
-        // °ÔÀÓ ¿ÀºêÁ§Æ®·ÎºÎÅÍ »ç¿ëÇÒ ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿Í º¯¼ö¿¡ ÇÒ´ç
+        // ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¡œë¶€í„° ì‚¬ìš©í•  ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì™€ ë³€ìˆ˜ì— í• ë‹¹
         characterRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (isDead) { return; } // Ä³¸¯ÅÍ »ç¸Á ½Ã Á¾·á
+        if (isDead) { return; } // ìºë¦­í„° ì‚¬ë§ ì‹œ ì¢…ë£Œ
 
-        // ÀÔ·ÂÀ» °¨ÁöÇÒ Ãà ÀÌ¸§ ¼³Á¤
+        // ì…ë ¥ì„ ê°ì§€í•  ì¶• ì´ë¦„ ì„¤ì •
         string hAxisName = "Horizontal" + charName;
         string vAxisName = "Vertical" + charName;
 
-        // ¼öÆò, ¼öÁ÷ ÃàÀÇ ÀÔ·Â°ªÀ» °¨ÁöÇØ ÀúÀå
+        // ìˆ˜í‰, ìˆ˜ì§ ì¶•ì˜ ì…ë ¥ê°’ì„ ê°ì§€í•´ ì €ì¥
         float xInput = Input.GetAxis(hAxisName);
         float yInput = Input.GetAxis(vAxisName);
 
-        // ÀÔ·Â ¹æÇâ¿¡ µû¸¥ ¾Ö´Ï¸ŞÀÌ¼Ç ÆÄ¶ó¹ÌÅÍ º¯°æ
+        // ì…ë ¥ ë°©í–¥ì— ë”°ë¥¸ ì• ë‹ˆë©”ì´ì…˜ íŒŒë¼ë¯¸í„° ë³€ê²½
         animator.SetInteger("GoFront", (int)yInput);
         animator.SetInteger("GoRight", (int)xInput);
 
-        // Ãà ÀÔ·Â°ª°ú ¼Ó·ÂÀ» ÀÌ¿ëÇØ Vector2 ¼Óµµ »ı¼º
+        // ì¶• ì…ë ¥ê°’ê³¼ ì†ë ¥ì„ ì´ìš©í•´ Vector2 ì†ë„ ìƒì„±
         Vector2 newVelocity = new Vector2(xInput * speed, yInput * speed);
-        // ¸®Áöµå¹Ùµğ ¼Óµµ¿¡ newVelocity ÇÒ´ç
+        // ë¦¬ì§€ë“œë°”ë”” ì†ë„ì— newVelocity í• ë‹¹
         characterRigidbody.velocity = newVelocity;
+
+        //ìºë¦­í„°ê°€ í™”ë©´ ë°–ìœ¼ë¡œ ë‚˜ê°€ì§€ ì•Šë„ë¡ ì›”ë“œì¢Œí‘œë¥¼ ë·°í¬íŠ¸ë¡œ ì œí•œ
+        Vector3 worldPos = Camera.main.WorldToViewportPoint(transform.position);
+        if (worldPos.x < 0.02f) worldPos.x = 0.02f;
+        if (worldPos.y < 0.045f) worldPos.y = 0.045f;
+        if (worldPos.x > 0.98f) worldPos.x = 0.98f;
+        transform.position = Camera.main.ViewportToWorldPoint(worldPos);
     }
 }
