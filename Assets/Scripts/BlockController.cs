@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// BlockController는 테트리스의 현재 블록으로 LeftBlock, RightBlock 게임 오브젝트를 제어
 public class BlockController : MonoBehaviour
 {
     public float tileSize = 0.5f; // 유닛 기준 타일의 크기
@@ -20,7 +21,7 @@ public class BlockController : MonoBehaviour
         // timeAfterFall 갱신
         timeAfterFall += Time.deltaTime;
 
-        // 최근 낙하 시점부터 누적된 시간이 낙하 주기 이상이면
+        // 누적된 시간이 낙하 주기 이상이고 블럭의 y좌표가 -2보다 크면
         if ((timeAfterFall >= fallCycle) && (transform.position.y > -2))
         {
             // 누적된 시간 리셋
@@ -31,9 +32,23 @@ public class BlockController : MonoBehaviour
         }
     }
 
-    public void move(int xDirection, int isRotate)
+    // 블록의 좌우 이동 및 회전 함수
+    public void Move(bool isRight, bool isRotate)
     {
-        transform.Translate(new Vector2(xDirection * tileSize, 0));
-        transform.Rotate(new Vector3(0, 0, isRotate * 90));
+        // 오른쪽이면(isRight == true) 오른쪽으로 타일크기만큼 이동
+        if (isRight) transform.Translate(new Vector2(tileSize, 0));
+        // 오른쪽이 아니면(isRight == false) 왼쪽으로 타일크기만큼 이동
+        else transform.Translate(new Vector2(-tileSize, 0));
+
+        // 회전이면(isRotate == true) 시계방향으로 90도 회전
+        if (isRotate) transform.Rotate(new Vector3(0, 0, 90));
+    }
+
+    // 블록 낙하 속도 조절 함수
+    public void ChangeSpeed(bool speedUp)
+    {
+        if (speedUp) fallCycle /= 2;    // 속도 상승
+        else fallCycle *= 2;    // 속도 하강
     }
 }
+

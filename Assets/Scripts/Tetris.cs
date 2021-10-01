@@ -15,17 +15,10 @@ public class Tetris : MonoBehaviour
     public int boardWidth = 5;
     [Range(5, 20)]
     public int boardHeight = 10;
-    public float fallCycle = 1.0f;
 
-    // Start is called before the first frame update
-
-    private int halfwidth;
-    private int halfheight;
 
     void Start()
     {
-        halfwidth = Mathf.RoundToInt(boardWidth * 0.5f);
-        halfheight = Mathf.RoundToInt(boardHeight * 0.5f);
         CreateLeftBlock();
         CreateRightBlock();
     }
@@ -33,16 +26,17 @@ public class Tetris : MonoBehaviour
     //왼쪽타일 생성
     Tile CreateLeftTile(Transform parent, Vector2 position, Color color, int order=1)
     {
-        var go = Instantiate(tileLeftprefab);
-        go.transform.parent = parent;
-        go.transform.localPosition = position;
+        var go = Instantiate(tileLeftprefab);//왼쪽타일프리팹 불러오기
+        go.transform.parent = parent;//부모 오브젝트 아래 자식 오브젝트로 생성
+        go.transform.localPosition = position;//오브젝트의 위치 설정
 
-        var tile = go.GetComponent<Tile>();
-        tile.color = color;
-        tile.sortingOrder = order;
+        var tile = go.GetComponent<Tile>();//타일 오브젝트 불러오기
+        tile.color = color;//타일 색상지정
+        tile.sortingOrder = order;//타일의 레이어
 
         return tile;
     }
+
     //왼쪽블록 생성
     void CreateLeftBlock()
     {
@@ -126,10 +120,11 @@ public class Tetris : MonoBehaviour
 
         return tile;
     }
+
     //오른쪽블록 생성
     void CreateRightBlock()
     {
-        int index = Random.Range(0, 7);//랜덤으로 블록생성
+        int index = Random.Range(0, 7);
         Color32 color = Color.white;
 
         RightBlock.rotation = Quaternion.identity;
@@ -195,7 +190,7 @@ public class Tetris : MonoBehaviour
         }
 
     }
-    // Update is called once per frame
+    
     void Update()
     {
         

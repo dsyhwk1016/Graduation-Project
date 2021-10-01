@@ -33,7 +33,7 @@ public class Tile : MonoBehaviour
 
     private void Awake()//오브젝트 생성후 바로 호출
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();//
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (spriteRenderer == null)
         {
