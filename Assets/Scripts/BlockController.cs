@@ -5,14 +5,16 @@ using UnityEngine;
 // BlockController는 테트리스의 현재 블록으로 LeftBlock, RightBlock 게임 오브젝트를 제어
 public class BlockController : MonoBehaviour
 {
+    public bool isFinish = false;   // 종료지점에 닿았는지 여부
     public float tileSize = 0.5f; // 유닛 기준 타일의 크기
+    public float changeFallCycle = 0.5f;    // 아래버튼에 의한 하강 주기
 
-    private float fallCycle = 1f;    // 기본 낙하 주기
-    private float timeAfterFall;    // 마지막 낙하 후 누적 시간
+    private float moveCycle = 1.5f;    // 기본 하강 주기
+    private float timeAfterFall;    // 마지막 하강 후 누적 시간
 
     void Start()
     {
-        // 마지막 낙하 후 누적 시간을 0으로 초기화
+        // 누적 시간 초기화
         timeAfterFall = 0f;
     }
 
@@ -21,34 +23,39 @@ public class BlockController : MonoBehaviour
         // timeAfterFall 갱신
         timeAfterFall += Time.deltaTime;
 
-        // 누적된 시간이 낙하 주기 이상이고 블럭의 y좌표가 -2보다 크면
-        if ((timeAfterFall >= fallCycle) && (transform.position.y > -2))
+        // 누적된 시간이 하강 주기 이상이고 블럭의 y좌표가 -2보다 크면
+        if ((timeAfterFall >= moveCycle) && !isFinish)
         {
             // 누적된 시간 리셋
             timeAfterFall = 0f;
 
-            // 블록을 타일크기만큼 낙하
-            transform.Translate(new Vector2(0, -tileSize));
+            // 블록을 타일크기만큼 하강
+            transform.position += new Vector3(0, -tileSize, 0);
         }
     }
 
     // 블록의 좌우 이동 및 회전 함수
-    public void Move(bool isRight, bool isRotate)
+    public void Move(int xDirection, bool isRotate)
     {
-        // 오른쪽이면(isRight == true) 오른쪽으로 타일크기만큼 이동
-        if (isRight) transform.Translate(new Vector2(tileSize, 0));
-        // 오른쪽이 아니면(isRight == false) 왼쪽으로 타일크기만큼 이동
-        else transform.Translate(new Vector2(-tileSize, 0));
+        // Finish라인에 닿지 않았을 때만 동작
+        if (!isFinish)
+        {
+            if (xDirection > 0) xDirection = 1; // x축 값이 양수면 1로 설정
+            else if (xDirection < 0) xDirection = -1;   // x축 값이 음수면 -1로 설정
 
-        // 회전이면(isRotate == true) 시계방향으로 90도 회전
-        if (isRotate) transform.Rotate(new Vector3(0, 0, 90));
+            // 입력된 x축 방향으로 타일 크기만큼 이동
+            transform.position += new Vector3(xDirection * tileSize, 0, 0);
+
+            // 회전이면(isRotate == true) 시계방향으로 90도 회전
+            if (isRotate) transform.Rotate(new Vector3(0, 0, 90));
+        }
     }
 
     // 블록 낙하 속도 조절 함수
     public void ChangeSpeed(bool speedUp)
     {
-        if (speedUp) fallCycle /= 2;    // 속도 상승
-        else fallCycle *= 2;    // 속도 하강
+        if (speedUp) moveCycle = changeFallCycle;    // 속도 상승
+        else moveCycle = 1.5f;    // 속도 하강
     }
 }
 

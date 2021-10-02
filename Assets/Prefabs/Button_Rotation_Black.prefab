@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3147141459905167940}
   - component: {fileID: 5758170826272635172}
   - component: {fileID: 8339784275801812685}
-  - component: {fileID: 7760606384403430372}
+  - component: {fileID: -4508420220736141608}
   m_Layer: 0
   m_Name: Button_Rotation_Black
-  m_TagString: Untagged
+  m_TagString: Rotation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8333333
---- !u!114 &7760606384403430372
+  m_Radius: 0.75
+--- !u!114 &-4508420220736141608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922a08cf9fb29461589816c156b8772a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriterenderer: {fileID: 0}
   newsprite:
   - {fileID: 21300000, guid: b1c9c79df0845a94e9339bd99a8959b7, type: 3}
   - {fileID: 21300000, guid: d7b2a33e1a606b244aa49a7d5a71ca70, type: 3}

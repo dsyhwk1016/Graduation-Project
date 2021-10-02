@@ -14,19 +14,19 @@ public class Button : MonoBehaviour
     public Transform RightButton;
 
     
-    public SpriteRenderer spriterenderer;
+    private SpriteRenderer spriterenderer;
     void Start()
     {
         spriterenderer = gameObject.GetComponent<SpriteRenderer>();
         
-        ButtonCreate(btnDownprefab, LeftButton, new Vector2(-4.5f, -8.0f));
-        ButtonCreate(btnLeftprefab, LeftButton, new Vector2(-6.77f, -5.88f));
-        ButtonCreate(btnRightprefab, LeftButton, new Vector2(-2.14f, -5.88f));
-        ButtonCreate(btnRoationprefab, LeftButton, new Vector2(-4.47f, -3.87f));
-        ButtonCreate(btnDownprefab, RightButton, new Vector2(4.5f, -8.0f));
-        ButtonCreate(btnLeftprefab, RightButton, new Vector2(2.14f, -5.88f));
-        ButtonCreate(btnRightprefab, RightButton, new Vector2(6.77f, -5.88f));
-        ButtonCreate(btnRoationprefab, RightButton, new Vector2(4.47f, -3.87f));
+        ButtonCreate(btnDownprefab, LeftButton, new Vector2(-8f, -8.3f));
+        ButtonCreate(btnLeftprefab, LeftButton, new Vector2(-10.5f, -6f));
+        ButtonCreate(btnRightprefab, LeftButton, new Vector2(-5.5f, -6f));
+        ButtonCreate(btnRoationprefab, LeftButton, new Vector2(-8f, -3.7f));
+        ButtonCreate(btnDownprefab, RightButton, new Vector2(8f, -8.3f));
+        ButtonCreate(btnLeftprefab, RightButton, new Vector2(5.5f, -6f));
+        ButtonCreate(btnRightprefab, RightButton, new Vector2(10.5f, -6f));
+        ButtonCreate(btnRoationprefab, RightButton, new Vector2(8f, -3.7f));
     }
 
     void Update()
