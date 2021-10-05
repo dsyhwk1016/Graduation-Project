@@ -5,6 +5,7 @@ using UnityEngine;
 // PlayerController는 플레이어의 캐릭터로서 Player 게임 오브젝트를 제어
 public class PlayerController : MonoBehaviour
 {
+    [Header("Editor Object")]
     public float speed;   // 이동 속력
     public string charName;    // 캐릭터 이름
 

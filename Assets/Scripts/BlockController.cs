@@ -5,12 +5,13 @@ using UnityEngine;
 // BlockController는 테트리스의 현재 블록으로 LeftBlock, RightBlock 게임 오브젝트를 제어
 public class BlockController : MonoBehaviour
 {
-    public bool isFinish = false;   // 종료지점에 닿았는지 여부
+    [Header("Editor Object")]
     public float tileSize = 0.5f; // 유닛 기준 타일의 크기
     public float changeFallCycle = 0.5f;    // 아래버튼에 의한 하강 주기
 
-    private float moveCycle = 1.5f;    // 기본 하강 주기
-    private float timeAfterFall;    // 마지막 하강 후 누적 시간
+    private bool isFinish = false;   // 종료지점에 닿았는지 여부
+    private float moveCycle = 1.5f;    // 기본 낙하 주기
+    private float timeAfterFall;    // 마지막 낙하 후 누적 시간
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class BlockController : MonoBehaviour
         // timeAfterFall 갱신
         timeAfterFall += Time.deltaTime;
 
-        // 누적된 시간이 하강 주기 이상이고 블럭의 y좌표가 -2보다 크면
+        // 누적된 시간이 낙하 주기 이상이고 finish가 아니면
         if ((timeAfterFall >= moveCycle) && !isFinish)
         {
             // 누적된 시간 리셋
@@ -56,6 +57,19 @@ public class BlockController : MonoBehaviour
     {
         if (speedUp) moveCycle = changeFallCycle;    // 속도 상승
         else moveCycle = 1.5f;    // 속도 하강
+    }
+
+    public bool IsFinish
+    {
+        set
+        {
+            isFinish = value;    // isFinish 할당
+        }
+
+        get
+        {
+            return isFinish; // isFinish 반환
+        }
     }
 }
 

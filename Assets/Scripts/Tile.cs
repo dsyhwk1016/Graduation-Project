@@ -2,13 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Tile은 블록 생성을 위한 프리팹으로, 충돌을 감지하고 색상과 레이어 변경
 public class Tile : MonoBehaviour
 {
     private string parentName;  // 부모 오브젝트 이름
+    private SpriteRenderer spriteRenderer;  // 사용할 스프라이트 렌더러 컴포넌트 변수
+
+    // 오브젝트 생성 후 바로 호출
+    private void Awake()
+    {
+        // SpriteRenderer 컴포넌트를 가져와 변수에 할당
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // SpriteRenderer 컴포넌트가 없을 경우 경고 메시지 출력
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("You need to SpriteRenderer for Block");
+        }
+    }
 
     void Start()
     {
-        parentName = gameObject.transform.parent.name;  // 변수에 부모 오브젝트 이름 할당
+        // 변수에 부모 오브젝트 이름 할당
+        parentName = gameObject.transform.parent.name;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -16,44 +32,34 @@ public class Tile : MonoBehaviour
         // Finish 게임 오브젝트와 충돌하면
         if (collision.gameObject.name == "Finish")
             // BlockController의 isFinish 값 변경
-            GameObject.Find(parentName).GetComponent<BlockController>().isFinish = true;
+            GameObject.Find(parentName).GetComponent<BlockController>().IsFinish = true;
     }
 
-    public Color color//타일의 색상 변경
+    // 타일의 색상 변경
+    public Color color
     {
         set
         {
-            spriteRenderer.color = value;
+            spriteRenderer.color = value;   // 색상 할당
         }
 
         get
         {
-            return spriteRenderer.color;
+            return spriteRenderer.color;    // 색상 반환
         }
     }
 
-    public int sortingOrder//스프라이트 표시 순서
+    // 스프라이트 표시 순서
+    public int sortingOrder
      {
         set
         {
-            spriteRenderer.sortingOrder = value;
+            spriteRenderer.sortingOrder = value;    // 레이어 할당
         }
 
         get
         {
-            return spriteRenderer.sortingOrder;
+            return spriteRenderer.sortingOrder; // 레이어 반환
         }
      }
-    SpriteRenderer spriteRenderer;
-
-    private void Awake()//오브젝트 생성후 바로 호출
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (spriteRenderer == null)
-        {
-            Debug.LogError("You need to SpriteRenderer for Block");
-        }
-    }
 }
-   

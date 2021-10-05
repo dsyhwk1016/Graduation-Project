@@ -608,7 +608,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 576960231}
-  - component: {fileID: 576960232}
   m_Layer: 0
   m_Name: LeftButton
   m_TagString: Untagged
@@ -630,19 +629,6 @@ Transform:
   m_Father: {fileID: 1407793966}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &576960232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576960230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922a08cf9fb29461589816c156b8772a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newsprite: []
 --- !u!1 &595904781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,7 +1114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8956fc1f3a473545b8c99fbffd50467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFinish: 0
   tileSize: 0.5
   changeFallCycle: 0.5
 --- !u!1 &1204551389
@@ -1160,8 +1145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27691aee1470b4ffdbe12c27dbf282bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileLeftprefab: {fileID: 1219896026911148879, guid: 8618c899eef6d4c97adc79e7dd528d50, type: 3}
-  tileRightprefab: {fileID: 4542766891112960775, guid: e4e4106e2263c4ba4bccfa2d2d24a1d3, type: 3}
+  tilePrefab: {fileID: 1219896026911148879, guid: 8618c899eef6d4c97adc79e7dd528d50, type: 3}
   LeftBlock: {fileID: 1152336765}
   RightBlock: {fileID: 1340034494}
   boardWidth: 10
@@ -1191,7 +1175,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1322287252}
-  - component: {fileID: 1322287253}
   m_Layer: 0
   m_Name: RightButton
   m_TagString: Untagged
@@ -1213,19 +1196,6 @@ Transform:
   m_Father: {fileID: 1407793966}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1322287253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322287251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922a08cf9fb29461589816c156b8772a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newsprite: []
 --- !u!1 &1324301137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8956fc1f3a473545b8c99fbffd50467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFinish: 0
   tileSize: 0.5
   changeFallCycle: 0.5
 --- !u!1 &1407793964
@@ -1457,10 +1426,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c273c9219b75043308cf05250b897060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnDownprefab: {fileID: 8969627086171298638, guid: f5e16773d0ad344648c9c4098bc94eb3, type: 3}
-  btnLeftprefab: {fileID: 2485074194883650176, guid: fb6d13a84694e44359e7aaf3ab969e99, type: 3}
-  btnRightprefab: {fileID: 8881626194021555950, guid: d73ec9086ee2a4fc594c5e338b2b67cf, type: 3}
-  btnRoationprefab: {fileID: 3933858512599191333, guid: 6b84807e66f5c4cd7af1e22c9f3b1d09, type: 3}
+  btnDownPrefab: {fileID: 8969627086171298638, guid: f5e16773d0ad344648c9c4098bc94eb3, type: 3}
+  btnLeftPrefab: {fileID: 2485074194883650176, guid: fb6d13a84694e44359e7aaf3ab969e99, type: 3}
+  btnRightPrefab: {fileID: 8881626194021555950, guid: d73ec9086ee2a4fc594c5e338b2b67cf, type: 3}
+  btnRotationPrefab: {fileID: 3933858512599191333, guid: 6b84807e66f5c4cd7af1e22c9f3b1d09, type: 3}
   LeftButton: {fileID: 576960231}
   RightButton: {fileID: 1322287252}
 --- !u!4 &1407793966
@@ -1572,8 +1541,8 @@ GameObject:
   - component: {fileID: 1594650893}
   - component: {fileID: 1594650892}
   - component: {fileID: 1594650894}
-  - component: {fileID: 1594650896}
   - component: {fileID: 1594650895}
+  - component: {fileID: 1594650896}
   - component: {fileID: 1594650897}
   m_Layer: 0
   m_Name: Ohm
@@ -1700,9 +1669,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.85
+  m_Radius: 0.7
 --- !u!114 &1594650897
 MonoBehaviour:
   m_ObjectHideFlags: 0

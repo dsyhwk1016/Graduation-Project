@@ -112,6 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922a08cf9fb29461589816c156b8772a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newsprite:
+  btnSprite:
   - {fileID: 21300000, guid: de520eeb0332cc04daad619bf9d2d06a, type: 3}
   - {fileID: 21300000, guid: f7a147f810255f8498ae17e7f4716dac, type: 3}
