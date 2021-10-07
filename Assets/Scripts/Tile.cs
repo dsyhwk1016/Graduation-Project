@@ -33,6 +33,8 @@ public class Tile : MonoBehaviour
         if (collision.gameObject.name == "Finish")
             // BlockController의 isFinish 값 변경
             GameObject.Find(parentName).GetComponent<BlockController>().IsFinish = true;
+        if (collision.gameObject.name == "Deadline")
+            GameManager.instance.OnGameOver();
     }
 
     // 타일의 색상 변경

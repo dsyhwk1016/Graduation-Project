@@ -4,11 +4,12 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - btnDownprefab: {fileID: 5576915593453716125, guid: f5e16773d0ad344648c9c4098bc94eb3, type: 3}
-  - btnLeftprefab: {fileID: 2485074194883650176, guid: fb6d13a84694e44359e7aaf3ab969e99, type: 3}
-  - btnRightprefab: {fileID: 8881626194021555950, guid: d73ec9086ee2a4fc594c5e338b2b67cf, type: 3}
-  - btnRoationprefab: {fileID: 3933858512599191333, guid: 6b84807e66f5c4cd7af1e22c9f3b1d09, type: 3}
-  - spriterenderer: {instanceID: 0}
+  - btnDownPrefab: {instanceID: 0}
+  - btnLeftPrefab: {instanceID: 0}
+  - btnRightPrefab: {instanceID: 0}
+  - btnRotationPrefab: {instanceID: 0}
+  - LeftButton: {instanceID: 0}
+  - RightButton: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

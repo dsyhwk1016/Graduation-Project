@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public float speed;   // 이동 속력
     public string charName;    // 캐릭터 이름
 
-    private bool isDead = false;    // 사망 상태
     private Rigidbody2D characterRigidbody; // 사용할 리지드바디 컴포넌트 변수
     private Animator animator;  // 사용할 애니메이터 컴포넌트 변수
 
@@ -22,8 +21,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isDead) { return; } // 캐릭터 사망 시 종료
-
         // 입력을 감지할 축 이름 설정
         string hAxisName = "Horizontal" + charName;
         string vAxisName = "Vertical" + charName;

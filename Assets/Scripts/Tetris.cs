@@ -22,8 +22,8 @@ public class Tetris : MonoBehaviour
     void Start()
     {
         // 랜덤한 테트리스 블록 생성
-        CreateBlock(LeftBlock, new Vector2(-8, 8));
-        CreateBlock(RightBlock, new Vector2(8, 8));
+        CreateBlock(LeftBlock, new Vector2(-8, 6.5f));
+        CreateBlock(RightBlock, new Vector2(8, 6.5f));
     }
 
     // 타일 생성
