@@ -1,57 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;  // ¾À °ü¸® °ü·Ã ¶óÀÌºê·¯¸®
-using UnityEngine.UI;   // UI °ü·Ã ¶óÀÌºê·¯¸®
+using UnityEngine.SceneManagement;  // ì”¬ ê´€ë¦¬ ê´€ë ¨ ë¼ì´ë¸ŒëŸ¬ë¦¬
+using UnityEngine.UI;   // UI ê´€ë ¨ ë¼ì´ë¸ŒëŸ¬ë¦¬
 
-// °ÔÀÓ¿À¹ö »óÅÂ¸¦ Ç¥ÇöÇÏ°í, °ÔÀÓ Á¡¼ö¿Í UI¸¦ °ü¸®ÇÏ´Â °ÔÀÓ ¸Å´ÏÀú
+// ê²Œì„ì˜¤ë²„ ìƒíƒœë¥¼ í‘œí˜„í•˜ê³ , ê²Œì„ ì ìˆ˜ì™€ UIë¥¼ ê´€ë¦¬í•˜ëŠ” ê²Œì„ ë§¤ë‹ˆì €
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance; // ½Ì±ÛÅÏÀ» ÇÒ´çÇÒ Àü¿ª º¯¼ö
+    public static GameManager instance; // ì‹±ê¸€í„´ì„ í• ë‹¹í•  ì „ì—­ ë³€ìˆ˜
 
     [Header("Editor Object")]
-    public Text scoreText;  // ÇÃ·¹ÀÌ Á¡¼ö¸¦ Ãâ·ÂÇÒ UI ÅØ½ºÆ®
-    public Text bestScoreText;  // ÃÖ°íÁ¡À» Ãâ·ÂÇÒ UI ÅØ½ºÆ®
-    public GameObject gameoverUI;   // °ÔÀÓ ¿À¹ö ½Ã È°¼ºÈ­ÇÒ UI °ÔÀÓ ¿ÀºêÁ§Æ®
-    public GameObject replayPrefab;   // Replay ¹öÆ° ÇÁ¸®ÆÕ
+    public Text scoreText;  // í”Œë ˆì´ ì ìˆ˜ë¥¼ ì¶œë ¥í•  UI í…ìŠ¤íŠ¸
+    public Text bestScoreText;  // ìµœê³ ì ì„ ì¶œë ¥í•  UI í…ìŠ¤íŠ¸
+    public GameObject gameoverUI;   // ê²Œì„ ì˜¤ë²„ ì‹œ í™œì„±í™”í•  UI ê²Œì„ ì˜¤ë¸Œì íŠ¸
+    public GameObject replayPrefab;   // Replay ë²„íŠ¼ í”„ë¦¬íŒ¹
     [HideInInspector]
-    public int replayButton;    // µÎ Replay ¹öÆ°ÀÌ ¸ğµÎ ´­·È´ÂÁö Ã¼Å©
+    public int replayButton;    // ë‘ Replay ë²„íŠ¼ì´ ëª¨ë‘ ëˆŒë ¸ëŠ”ì§€ ì²´í¬
 
-    private bool isGameover = false; // °ÔÀÓ¿À¹ö »óÅÂ
-    private int score = 0;  // ÇÃ·¹ÀÌ Á¡¼ö
-    private float surviveTime = 0;  // »ıÁ¸ ½Ã°£
+    private bool isGameover = false; // ê²Œì„ì˜¤ë²„ ìƒíƒœ
+    private int score = 0;  // í”Œë ˆì´ ì ìˆ˜
+    private float surviveTime = 0;  // ìƒì¡´ ì‹œê°„
     
-    // °ÔÀÓ ½ÃÀÛ°ú µ¿½Ã¿¡ ½Ì±ÛÅÏ ±¸¼º
+    // ê²Œì„ ì‹œì‘ê³¼ ë™ì‹œì— ì‹±ê¸€í„´ êµ¬ì„±
     void Awake()
     {
-        // instance°¡ ºñ¾îÀÖÀ¸¸é ÀÚ½ÅÀÇ °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ÇÒ´ç
+        // instanceê°€ ë¹„ì–´ìˆìœ¼ë©´ ìì‹ ì˜ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ í• ë‹¹
         if (instance == null) instance = this;
         else
         {
-            // instance¿¡ ÀÌ¹Ì ´Ù¸¥ GameManager ¿ÀºêÁ§Æ®°¡ ÇÒ´çµÇ¾î ÀÖ´Â °æ¿ì
-            Debug.LogWarning("¾À¿¡ µÎ °³ ÀÌ»óÀÇ °ÔÀÓ ¸Å´ÏÀú°¡ Á¸ÀçÇÕ´Ï´Ù.");  // °æ°í ¸Ş½ÃÁö Ãâ·Â ÈÄ
-            Destroy(gameObject);    // ÀÚ½ÅÀÇ °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ÆÄ±«
+            // instanceì— ì´ë¯¸ ë‹¤ë¥¸ GameManager ì˜¤ë¸Œì íŠ¸ê°€ í• ë‹¹ë˜ì–´ ìˆëŠ” ê²½ìš°
+            Debug.LogWarning("ì”¬ì— ë‘ ê°œ ì´ìƒì˜ ê²Œì„ ë§¤ë‹ˆì €ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");  // ê²½ê³  ë©”ì‹œì§€ ì¶œë ¥ í›„
+            Destroy(gameObject);    // ìì‹ ì˜ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ íŒŒê´´
         }
     }
 
     void Start()
     {
-        replayButton = 0;   // ¹öÆ° ÅÍÄ¡ Ä«¿îÆ® ÃÊ±âÈ­
+        replayButton = 0;   // ë²„íŠ¼ í„°ì¹˜ ì¹´ìš´íŠ¸ ì´ˆê¸°í™”
 
-        // °ÔÀÓ¿À¹ö UIÀÇ ÀÚ½ÄÀ¸·Î Replay ¹öÆ° »ı¼º
-        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-302.5f, -281.5f));
-        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-286.5f, -281.5f));
+        // ê²Œì„ì˜¤ë²„ UIì˜ ìì‹ìœ¼ë¡œ Replay ë²„íŠ¼ ìƒì„±
+        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-302f, -281f));
+        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-286, -281));
     }
 
     void Update()
     {
-        // °ÔÀÓ¿À¹ö°¡ ¾Æ´Ï¸é
+        // ê²Œì„ì˜¤ë²„ê°€ ì•„ë‹ˆë©´
         if (!isGameover)
         {
-            // »ıÁ¸ ½Ã°£ °»½Å
+            // ìƒì¡´ ì‹œê°„ ê°±ì‹ 
             surviveTime += Time.deltaTime;
 
-            // 15ÃÊ¸¶´Ù 98Á¡ Ãß°¡
+            // 15ì´ˆë§ˆë‹¤ 98ì  ì¶”ê°€
             if (surviveTime >= 15)
             {
                 surviveTime = 0;
@@ -60,61 +60,65 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // µÎ °³ÀÇ Replay ¹öÆ°À» ¸ğµÎ ´­·¶´Ù¸é
+            // ë‘ ê°œì˜ Replay ë²„íŠ¼ì„ ëª¨ë‘ ëˆŒë €ë‹¤ë©´
             if(replayButton == 2)
             {
-                replayButton = 0;   // 0À¸·Î ÃÊ±âÈ­
+                replayButton = 0;   // 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-                // ÇöÀç ¾À Àç·Îµå
+                // í˜„ì¬ ì”¬ ì¬ë¡œë“œ
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
     }
 
-    // ¹öÆ° »ı¼º ÇÔ¼ö
+    // ë²„íŠ¼ ìƒì„± í•¨ìˆ˜
     void ButtonCreate(GameObject prefab, Transform parent, Vector2 position, int order = 1)
     {
-        var load = Instantiate(prefab); // ÇÁ¸®ÆÕ º¹Á¦
-        load.transform.parent = parent; // ºÎ¸ğ ¿ÀºêÁ§Æ® ÁöÁ¤
-        load.transform.localPosition = position;    // ¿ÀºêÁ§Æ®ÀÇ À§Ä¡ ¼³Á¤
+        var load = Instantiate(prefab); // í”„ë¦¬íŒ¹ ë³µì œ
+        load.transform.parent = parent; // ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ ì§€ì •
+        load.transform.localPosition = position;    // ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ ì„¤ì •
 
-        var btn = load.GetComponent<SpriteRenderer>();  // SpriteRenderer ÄÄÆ÷³ÍÆ® ÇÒ´ç
-        btn.sortingOrder = order;   // ·¹ÀÌ¾î ¼ø¼­ ÁöÁ¤
+        var btn = load.GetComponent<SpriteRenderer>();  // SpriteRenderer ì»´í¬ë„ŒíŠ¸ í• ë‹¹
+        btn.sortingOrder = order;   // ë ˆì´ì–´ ìˆœì„œ ì§€ì •
     }
 
-    // Á¡¼ö Ãß°¡ ÇÔ¼ö
+    // ì ìˆ˜ ì¶”ê°€ í•¨ìˆ˜
     public void AddScore(int newScore)
     {
-        // °ÔÀÓ ¿À¹ö°¡ ¾Æ´Ï¶ó¸é
+        // ê²Œì„ ì˜¤ë²„ê°€ ì•„ë‹ˆë¼ë©´
         if (!isGameover)
         {
-            score += newScore;  // ÇöÀç Á¡¼ö °»½Å
-            scoreText.text = "SCORE\n" + score; // ÇöÀç Á¡¼ö Ãâ·Â
+            score += newScore;  // í˜„ì¬ ì ìˆ˜ ê°±ì‹ 
+            scoreText.text = "SCORE\n" + score; // í˜„ì¬ ì ìˆ˜ ì¶œë ¥
         }
     }
 
-    // °ÔÀÓ ¿À¹ö ½Ã µ¿ÀÛ
+    // ê²Œì„ ì˜¤ë²„ ì‹œ ë™ì‘
     public void OnGameOver()
     {
-        // ÇöÀç »óÅÂ¸¦ °ÔÀÓ¿À¹ö »óÅÂ·Î º¯°æ
+        // í˜„ì¬ ìƒíƒœë¥¼ ê²Œì„ì˜¤ë²„ ìƒíƒœë¡œ ë³€ê²½
         isGameover = true;
         
-        gameoverUI.SetActive(true); // °ÔÀÓ¿À¹ö UI ¿ÀºêÁ§Æ® È°¼ºÈ­
-        scoreText.enabled = false;  // ÇöÀç ½ºÄÚ¾î ÅØ½ºÆ® ÄÄÆ÷³ÍÆ® ºñÈ°¼ºÈ­
+        gameoverUI.SetActive(true); // ê²Œì„ì˜¤ë²„ UI ì˜¤ë¸Œì íŠ¸ í™œì„±í™”
+        scoreText.enabled = false;  // í˜„ì¬ ìŠ¤ì½”ì–´ í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸ ë¹„í™œì„±í™”
 
-        // BestScore Å°·Î ÀúÀåµÈ ÃÖ°í Á¡¼ö °¡Á®¿À±â
+        // BlockController ì»´í¬ë„ŒíŠ¸ ë¹„í™œì„±í™”(ì›€ì§ì„ ì¢…ë£Œ)
+        GameObject.Find("LeftBlock").GetComponent<BlockController>().enabled = false;
+        GameObject.Find("RightBlock").GetComponent<BlockController>().enabled = false;
+
+        // BestScore í‚¤ë¡œ ì €ì¥ëœ ìµœê³  ì ìˆ˜ ê°€ì ¸ì˜¤ê¸°
         int bestScore = PlayerPrefs.GetInt("BestScore");
 
-        // ÇöÀç Á¡¼ö°¡ ÃÖ°í Á¡¼öº¸´Ù Å©¸é
+        // í˜„ì¬ ì ìˆ˜ê°€ ìµœê³  ì ìˆ˜ë³´ë‹¤ í¬ë©´
         if(score > bestScore)
         {
-            // ÃÖ°í Á¡¼ö¸¦ ÇöÀç Á¡¼ö·Î º¯°æ
+            // ìµœê³  ì ìˆ˜ë¥¼ í˜„ì¬ ì ìˆ˜ë¡œ ë³€ê²½
             bestScore = score;
-            // º¯°æµÈ ÃÖ°í Á¡¼ö¸¦ BestScore Å°·Î ÀúÀå
+            // ë³€ê²½ëœ ìµœê³  ì ìˆ˜ë¥¼ BestScore í‚¤ë¡œ ì €ì¥
             PlayerPrefs.SetInt("BestScore", bestScore);
         }
 
-        // ÃÖ°í Á¡¼ö¿Í ÇÃ·¹ÀÌ Á¡¼ö Ãâ·Â
+        // ìµœê³  ì ìˆ˜ì™€ í”Œë ˆì´ ì ìˆ˜ ì¶œë ¥
         bestScoreText.text = "BEST SCORE : " + bestScore + "\nPLAY SCORE : " + score;
     }
 }

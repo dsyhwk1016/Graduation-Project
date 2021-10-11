@@ -13,17 +13,16 @@ public class Tetris : MonoBehaviour
     [Header("Game Settings")]
     // 테트리스 게임 보드의 너비를 4~20으로 제한
     [Range(4, 20)]
-    public int boardWidth = 10;
+    public int boardWidth = 12;
     // 테트리스 게임 보드의 높이를 5~40으로 제한
     [Range(5, 40)]
     public int boardHeight = 20;
 
-
     void Start()
     {
         // 랜덤한 테트리스 블록 생성
-        CreateBlock(LeftBlock, new Vector2(-8, 6.5f));
-        CreateBlock(RightBlock, new Vector2(8, 6.5f));
+        CreateBlock(LeftBlock, new Vector2(-8, 7.5f));
+        CreateBlock(RightBlock, new Vector2(8, 7.5f));
     }
 
     // 타일 생성
@@ -41,7 +40,7 @@ public class Tetris : MonoBehaviour
     }
 
     // 랜덤 블록 생성
-    void CreateBlock(Transform parent, Vector2 position)
+    public void CreateBlock(Transform parent, Vector2 position)
     {
         int index = Random.Range(0, 7); // 랜덤 변수 생성
         Color32 color = Color.white;    // 색상 초기화
@@ -52,6 +51,7 @@ public class Tetris : MonoBehaviour
         switch(index)
         {
             case 0: // 분홍색(I-Block)
+                parent.position += new Vector3(0, 0.5f, 0);    // 위치 조정
                 color = new Color32(239, 115, 196, 255);    // 블록 색상 지정
                 // 블록 모양에 맞춰 타일 생성
                 CreateTile(parent, new Vector2(-1f, 0.0f), color);
@@ -61,6 +61,7 @@ public class Tetris : MonoBehaviour
                 break;
                 
             case 1: // 주황색(J-Block)
+                parent.position -= new Vector3(0, 0.5f, 0);
                 color = new Color32(231,151,117, 255);
                 CreateTile(parent, new Vector2(-0.5f, 0.0f), color);
                 CreateTile(parent, new Vector2(0f, 0.0f), color);
@@ -69,6 +70,7 @@ public class Tetris : MonoBehaviour
                 break;
 
             case 2: // 노란색(L-Block)
+                parent.position -= new Vector3(0, 0.5f, 0);
                 color = new Color32(255,236,143, 255);
                 CreateTile(parent, new Vector2(0f, 1f), color);
                 CreateTile(parent, new Vector2(0f, 0.5f), color);
