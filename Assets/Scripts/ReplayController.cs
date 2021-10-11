@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Replay ¹öÆ°À¸·Î¼­ ¾À Àç·Îµå
+// Replay ë²„íŠ¼ìœ¼ë¡œì„œ ì”¬ ì¬ë¡œë“œ
 public class ReplayController : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collider)
     {
-        // Ãæµ¹Ã¼°¡ Player ÅÂ±×¸¦ °¡Áö°í ÀÖÀ¸¸é
+        // ì¶©ëŒì²´ê°€ Player íƒœê·¸ë¥¼ ê°€ì§€ê³  ìˆìœ¼ë©´
         if (collider.tag == "Player")
         {
-            GameManager.instance.replayButton++;  // °ÔÀÓ ¸Å´ÏÀúÀÇ replayButton °ªÀ» 1 Áõ°¡
+            GameManager.instance.replayButton++;  // ê²Œì„ ë§¤ë‹ˆì €ì˜ replayButton ê°’ì„ 1 ì¦ê°€
 
-            // ¹öÆ° OnÀÏ ¶§ »ö»ó º¯°æ
+            // ë²„íŠ¼ Onì¼ ë•Œ ìƒ‰ìƒ ë³€ê²½
             gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 240, 180, 255);
         }
     }

@@ -27,16 +27,6 @@ public class Tile : MonoBehaviour
         parentName = gameObject.transform.parent.name;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Finish 게임 오브젝트와 충돌하면
-        if (collision.gameObject.name == "Finish")
-            // BlockController의 isFinish 값 변경
-            GameObject.Find(parentName).GetComponent<BlockController>().IsFinish = true;
-        if (collision.gameObject.name == "Deadline")
-            GameManager.instance.OnGameOver();
-    }
-
     // 타일의 색상 변경
     public Color color
     {
