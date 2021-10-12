@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
         replayButton = 0;   // 버튼 터치 카운트 초기화
 
         // 게임오버 UI의 자식으로 Replay 버튼 생성
-        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-302f, -281f));
-        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-286, -281));
+        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-329f, -306f));
+        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-311, -306));
     }
 
     void Update()

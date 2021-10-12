@@ -57,17 +57,18 @@ public class BlockController : MonoBehaviour
         }
         else if (isFinish)  // 블록이 착지했으면
         {
-            // 현재 오브젝트의 자식 오브젝트를 모두
+            // 현재 오브젝트의 자식 오브젝트를 모두 확인
             foreach (Transform child in transform)
             {
                 if(child.position.y >= 8)   // 데드라인을 넘었으면
                 {
-                    GameManager.instance.OnGameOver();
+                    GameManager.instance.OnGameOver();  // 게임 오버 실행
                     break;
                 }
 
                 child.parent = stopObject;    // 착지 오브젝트의 자식으로 이동
                 child.name = child.position.ToString(); // 이름을 좌표값으로 설정
+                Invoke("CheckRow", 0.1f);   // 0.1초 뒤 ChechRow 함수 호출
             }
 
             Invoke("NewBlockCreate", 0.1f); // 0.1초 뒤 NewBlockCreate 함수 호출
@@ -121,10 +122,9 @@ public class BlockController : MonoBehaviour
             tetrisScript.CreateBlock(gameObject.transform, new Vector2(8, 7.5f));
         else Debug.LogWarning("없는 오브젝트 입니다.");
 
+        // 새 블록이 생성될 위치에 이미 블록이 있다면
         if (!CanMove())
-        {
-            transform.position += new Vector3(0, 0.5f, 0);
-        }
+            transform.position += new Vector3(0, 0.5f, 0);  // 위로 한 칸 이동
 
         // 착지할 때마다 267점 추가
         GameManager.instance.AddScore(267);
@@ -147,18 +147,18 @@ public class BlockController : MonoBehaviour
             if (gameObject.name == "LeftBlock")
             {
                 // 이동 가능한 좌표인지 확인 후 반환
-                if (x < -11 || x >-5 )  // 실제 가능 좌표는 -11.25~-5.25
+                if (x < -11 || x > -5.5)  // 실제 가능 좌표는 -11.25~-5.25
                     return false;
             }
 
             if (gameObject.name == "RightBlock")
             {
                 // 이동 가능한 좌표인지 확인 후 반환
-                if (x < 5 || x > 11)    // 실제 가능 좌표는 5.25~11.25
+                if (x < 5.5 || x > 11)    // 실제 가능 좌표는 5.25~11.25
                     return false;
             }
 
-            if (y < -2) // 바닥에 닿았는지 확인
+            if (y < -1.5) // 바닥에 닿았는지 확인
             {
                 isFinish = true;    // 착지 설정
                 return false;
@@ -173,5 +173,68 @@ public class BlockController : MonoBehaviour
             }
         }
         return true;
+    }
+
+    // 한 줄이 꽉 찼는지 검사
+    void CheckRow()
+    {
+        // 가장 윗줄부터 아래로 내려오면서 검사
+        for (float height = 8f; height >= -2f; height -= 0.5f)
+        {
+            int count = 0;  // 타일 개수 초기화
+
+            // 타일 오브젝트 이름을 구분할 문자열 설정
+            string name = ", " + height.ToString("F1") + ", ";
+
+            // stopObject의 자식 타일 모두 확인
+            foreach (Transform child in stopObject)
+            {
+                // 자식 오브젝트의 이름이 name을 포함하면 count 증가
+                if (child.name.Contains(name)) count++;
+
+                // 개수가 10개면 한 줄이 꽉 참
+                if (count == 10)
+                {
+                    DeleteLine(name);   // 줄 삭제
+                    RowDown(height + 0.5f); // 윗 줄 내리기
+                    break;
+                }
+            }
+        }
+        CancelInvoke("CheckRow");   // 반복되고 있는 Invoke 취소
+    }
+
+    // 줄 삭제 함수
+    void DeleteLine(string name)
+    {
+        // stopObject의 자식 중
+        foreach (Transform child in stopObject)
+        {
+            if (child.name.Contains(name))  // 이름에 전달 받은 문자열을 포함하면
+                Destroy(child.gameObject);  // 해당 오브젝트 삭제
+        }
+
+        // 한 줄 삭제 시 2017점 추가
+        GameManager.instance.AddScore(2017);
+    }
+
+    // 줄 내리기 함수
+    void RowDown(float height)
+    {
+        // 삭제된 윗 줄부터 가장 윗줄까지
+        for (float yPos = height; height <= 8; height += 0.5f)
+        {
+            // 이름 문자열 설정
+            string name = ", " + height.ToString("F1") + ", ";
+
+            foreach (Transform child in stopObject) // 모든 자식 오브젝트를
+            {
+                if (child.name.Contains(name))
+                {
+                    child.position -= new Vector3(0, 0.5f, 0);  // 한 칸 내리고
+                    child.name = child.position.ToString(); // 이름 재설정
+                }
+            }
+        }
     }
 }
