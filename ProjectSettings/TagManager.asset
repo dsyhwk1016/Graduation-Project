@@ -8,7 +8,6 @@ TagManager:
   - Left
   - Right
   - Rotation
-  - Stop
   layers:
   - Default
   - TransparentFX

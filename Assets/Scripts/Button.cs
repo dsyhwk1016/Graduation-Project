@@ -19,14 +19,14 @@ public class Button : MonoBehaviour
     void Start()
     {        
         // 버튼 생성 함수 호출
-        ButtonCreate(btnDownPrefab, LeftButton, new Vector2(-8f, -8.3f));
-        ButtonCreate(btnLeftPrefab, LeftButton, new Vector2(-10.5f, -6f));
-        ButtonCreate(btnRightPrefab, LeftButton, new Vector2(-5.5f, -6f));
-        ButtonCreate(btnRotationPrefab, LeftButton, new Vector2(-8f, -3.7f));
-        ButtonCreate(btnDownPrefab, RightButton, new Vector2(8f, -8.3f));
-        ButtonCreate(btnLeftPrefab, RightButton, new Vector2(5.5f, -6f));
-        ButtonCreate(btnRightPrefab, RightButton, new Vector2(10.5f, -6f));
-        ButtonCreate(btnRotationPrefab, RightButton, new Vector2(8f, -3.7f));
+        ButtonCreate(btnDownPrefab, LeftButton, new Vector2(-8.25f, -8.3f));
+        ButtonCreate(btnLeftPrefab, LeftButton, new Vector2(-10.75f, -6f));
+        ButtonCreate(btnRightPrefab, LeftButton, new Vector2(-5.75f, -6f));
+        ButtonCreate(btnRotationPrefab, LeftButton, new Vector2(-8.25f, -3.7f));
+        ButtonCreate(btnDownPrefab, RightButton, new Vector2(8.25f, -8.3f));
+        ButtonCreate(btnLeftPrefab, RightButton, new Vector2(5.75f, -6f));
+        ButtonCreate(btnRightPrefab, RightButton, new Vector2(10.75f, -6f));
+        ButtonCreate(btnRotationPrefab, RightButton, new Vector2(8.25f, -3.7f));
     }
 
     // 버튼 생성
