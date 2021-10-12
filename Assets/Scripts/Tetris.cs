@@ -10,19 +10,17 @@ public class Tetris : MonoBehaviour
     public Transform LeftBlock; // 타일이 생성될 왼쪽 부모 오브젝트
     public Transform RightBlock;    // 타일이 생성될 오른쪽 부모 오브젝트
 
-    [Header("Game Settings")]
-    // 테트리스 게임 보드의 너비를 4~20으로 제한
-    [Range(4, 20)]
-    public int boardWidth = 12;
-    // 테트리스 게임 보드의 높이를 5~40으로 제한
-    [Range(5, 40)]
-    public int boardHeight = 20;
-
     void Start()
     {
+        // BoardController 컴포넌트 가져오기
+        BoardController tetrisSize = GameObject.FindObjectOfType<BoardController>().GetComponent<BoardController>();
+
+        // 테트리스 보드 크기에 맞춰 블록 생성 높이 지정
+        float blockHeight = tetrisSize.boardHeight / 4f - 0.75f;
+
         // 랜덤한 테트리스 블록 생성
-        CreateBlock(LeftBlock, new Vector2(-8, 7.5f));
-        CreateBlock(RightBlock, new Vector2(8, 7.5f));
+        CreateBlock(LeftBlock, new Vector2(-8, 3.25f + blockHeight));
+        CreateBlock(RightBlock, new Vector2(8, 3.25f + blockHeight));
     }
 
     // 타일 생성

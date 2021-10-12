@@ -11,10 +11,13 @@ public class Button : MonoBehaviour
     public GameObject btnLeftPrefab;
     public GameObject btnRightPrefab;
     public GameObject btnRotationPrefab;
+    public GameObject replayPrefab;
 
+    [Space(10f)]
     // 버튼이 생성될 부모 오브젝트
     public Transform LeftButton;
     public Transform RightButton;
+    public Transform replayButton;
     
     void Start()
     {        
@@ -27,6 +30,10 @@ public class Button : MonoBehaviour
         ButtonCreate(btnLeftPrefab, RightButton, new Vector2(5.75f, -6f));
         ButtonCreate(btnRightPrefab, RightButton, new Vector2(10.75f, -6f));
         ButtonCreate(btnRotationPrefab, RightButton, new Vector2(8.25f, -3.7f));
+
+        // Replay 버튼 생성
+        ButtonCreate(replayPrefab, replayButton, new Vector2(-8.25f, -6f));
+        ButtonCreate(replayPrefab, replayButton, new Vector2(8.25f, -6f));
     }
 
     // 버튼 생성

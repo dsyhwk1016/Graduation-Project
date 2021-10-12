@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         if (worldPos.x < 0.02f) worldPos.x = 0.02f;
         if (worldPos.y < 0.045f) worldPos.y = 0.045f;
         if (worldPos.x > 0.98f) worldPos.x = 0.98f;
+        if (worldPos.y > 0.4f) worldPos.y = 0.4f;
         transform.position = Camera.main.ViewportToWorldPoint(worldPos);
     }
 }

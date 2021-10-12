@@ -6,18 +6,29 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
     [Header("Editor Object")]
-    public float tileSize = 0.5f; // 유닛 기준 타일의 크기
     public float changeFallCycle = 0.5f;    // 아래버튼에 의한 하강 주기
     public Transform stopObject;  // 착지 시 이동할 오브젝트
+
+    [SerializeField]
+    private float tileSize = 0.5f; // 유닛 기준 타일의 크기
 
     private bool isFinish = false;   // 착지했는지 여부
     private bool xMove = false;  // 좌우 이동 여부
     private float moveCycle = 1.5f;    // 기본 낙하 주기
     private float timeAfterFall;    // 마지막 낙하 후 누적 시간
+    private float boardHeight;  // 생성된 보드의 높이
+    private float boardWidth;   // 생성된 보드의 넓이
     private Tetris tetrisScript;    // 사용할 Tetris 컴포넌트
 
     void Start()
     {
+        // BoardController 컴포넌트 가져오기
+        BoardController tetrisSize = GameObject.FindObjectOfType<BoardController>().GetComponent<BoardController>();
+
+        // 생성된 보드 크기에 맞춰 블록 위치 제한
+        boardHeight = tetrisSize.boardHeight / 4f;
+        boardWidth = tetrisSize.boardWidth / 4f;
+
         timeAfterFall = 0f; // 누적 시간 초기화
         // Tetris 컴포넌트를 갖고있는 오브젝트를 찾아 Tetris 컴포넌트 할당
         tetrisScript = GameObject.FindObjectOfType<Tetris>().GetComponent<Tetris>();
@@ -60,7 +71,7 @@ public class BlockController : MonoBehaviour
             // 현재 오브젝트의 자식 오브젝트를 모두 확인
             foreach (Transform child in transform)
             {
-                if(child.position.y >= 8)   // 데드라인을 넘었으면
+                if(child.position.y >= 3 + boardHeight)   // 데드라인을 넘었으면
                 {
                     GameManager.instance.OnGameOver();  // 게임 오버 실행
                     break;
@@ -117,9 +128,9 @@ public class BlockController : MonoBehaviour
     {
         // 새 블록 생성
         if (gameObject.name == "LeftBlock")
-            tetrisScript.CreateBlock(gameObject.transform, new Vector2(-8, 7.5f));
+            tetrisScript.CreateBlock(gameObject.transform, new Vector2(-8, 2.5f + boardHeight));
         else if (gameObject.name == "RightBlock")
-            tetrisScript.CreateBlock(gameObject.transform, new Vector2(8, 7.5f));
+            tetrisScript.CreateBlock(gameObject.transform, new Vector2(8, 2.5f + boardHeight));
         else Debug.LogWarning("없는 오브젝트 입니다.");
 
         // 새 블록이 생성될 위치에 이미 블록이 있다면
@@ -147,18 +158,18 @@ public class BlockController : MonoBehaviour
             if (gameObject.name == "LeftBlock")
             {
                 // 이동 가능한 좌표인지 확인 후 반환
-                if (x < -11 || x > -5.5)  // 실제 가능 좌표는 -11.25~-5.25
+                if (x < -8.25f - boardWidth || x > -8.25f + boardWidth)  // 실제 가능 좌표는 -11.25~-5.25
                     return false;
             }
 
             if (gameObject.name == "RightBlock")
             {
                 // 이동 가능한 좌표인지 확인 후 반환
-                if (x < 5.5 || x > 11)    // 실제 가능 좌표는 5.25~11.25
+                if (x < 8.25f - boardWidth || x > 8.25f + boardWidth)    // 실제 가능 좌표는 5.25~11.25
                     return false;
             }
 
-            if (y < -1.5) // 바닥에 닿았는지 확인
+            if (y <= 3f - boardHeight) // 바닥에 닿았는지 확인
             {
                 isFinish = true;    // 착지 설정
                 return false;
@@ -193,7 +204,7 @@ public class BlockController : MonoBehaviour
                 if (child.name.Contains(name)) count++;
 
                 // 개수가 10개면 한 줄이 꽉 참
-                if (count == 10)
+                if (count == 12)
                 {
                     DeleteLine(name);   // 줄 삭제
                     RowDown(height + 0.5f); // 윗 줄 내리기

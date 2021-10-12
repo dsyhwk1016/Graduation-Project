@@ -12,10 +12,21 @@ public class GameManager : MonoBehaviour
     [Header("Editor Object")]
     public Text scoreText;  // 플레이 점수를 출력할 UI 텍스트
     public Text bestScoreText;  // 최고점을 출력할 UI 텍스트
-    public GameObject gameoverUI;   // 게임 오버 시 활성화할 UI 게임 오브젝트
-    public GameObject replayPrefab;   // Replay 버튼 프리팹
+
+    [Space(10f)]
+    // 게임 오버 시 활성화 할 오브젝트
+    public GameObject gameoverUI;
+    public GameObject replay;
+
+    [Space(10f)]
+    // 게임 오버 시 비활성화 할 오브젝트 및 컴포넌트
+    public GameObject leftBtn;
+    public GameObject rightBtn;
+    public BlockController leftBlock;
+    public BlockController rightBlock;
+
     [HideInInspector]
-    public int replayButton;    // 두 Replay 버튼이 모두 눌렸는지 체크
+    public int replayButton = 0;    // 두 Replay 버튼이 모두 눌렸는지 체크
 
     private bool isGameover = false; // 게임오버 상태
     private int score = 0;  // 플레이 점수
@@ -32,15 +43,6 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("씬에 두 개 이상의 게임 매니저가 존재합니다.");  // 경고 메시지 출력 후
             Destroy(gameObject);    // 자신의 게임 오브젝트를 파괴
         }
-    }
-
-    void Start()
-    {
-        replayButton = 0;   // 버튼 터치 카운트 초기화
-
-        // 게임오버 UI의 자식으로 Replay 버튼 생성
-        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-329f, -306f));
-        ButtonCreate(replayPrefab, gameoverUI.transform, new Vector2(-311, -306));
     }
 
     void Update()
@@ -71,17 +73,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 버튼 생성 함수
-    void ButtonCreate(GameObject prefab, Transform parent, Vector2 position, int order = 1)
-    {
-        var load = Instantiate(prefab); // 프리팹 복제
-        load.transform.parent = parent; // 부모 오브젝트 지정
-        load.transform.localPosition = position;    // 오브젝트의 위치 설정
-
-        var btn = load.GetComponent<SpriteRenderer>();  // SpriteRenderer 컴포넌트 할당
-        btn.sortingOrder = order;   // 레이어 순서 지정
-    }
-
     // 점수 추가 함수
     public void AddScore(int newScore)
     {
@@ -101,10 +92,13 @@ public class GameManager : MonoBehaviour
         
         gameoverUI.SetActive(true); // 게임오버 UI 오브젝트 활성화
         scoreText.enabled = false;  // 현재 스코어 텍스트 컴포넌트 비활성화
+        replay.SetActive(true); // 리플레이 버튼 활성화
 
-        // BlockController 컴포넌트 비활성화(움직임 종료)
-        GameObject.Find("LeftBlock").GetComponent<BlockController>().enabled = false;
-        GameObject.Find("RightBlock").GetComponent<BlockController>().enabled = false;
+        // 버튼 및 블록 동작 비활성화
+        leftBlock.enabled = false;
+        rightBlock.enabled = false;
+        leftBtn.SetActive(false);
+        rightBtn.SetActive(false);
 
         // BestScore 키로 저장된 최고 점수 가져오기
         int bestScore = PlayerPrefs.GetInt("BestScore");
