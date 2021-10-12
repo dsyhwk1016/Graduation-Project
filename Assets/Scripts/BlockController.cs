@@ -128,9 +128,9 @@ public class BlockController : MonoBehaviour
     {
         // 새 블록 생성
         if (gameObject.name == "LeftBlock")
-            tetrisScript.CreateBlock(gameObject.transform, new Vector2(-8, 2.5f + boardHeight));
+            tetrisScript.CreateBlock(gameObject.transform, new Vector2(-8.25f, 2.5f + boardHeight));
         else if (gameObject.name == "RightBlock")
-            tetrisScript.CreateBlock(gameObject.transform, new Vector2(8, 2.5f + boardHeight));
+            tetrisScript.CreateBlock(gameObject.transform, new Vector2(8.25f, 2.5f + boardHeight));
         else Debug.LogWarning("없는 오브젝트 입니다.");
 
         // 새 블록이 생성될 위치에 이미 블록이 있다면

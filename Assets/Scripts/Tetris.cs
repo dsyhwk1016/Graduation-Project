@@ -19,8 +19,8 @@ public class Tetris : MonoBehaviour
         float blockHeight = tetrisSize.boardHeight / 4f - 0.75f;
 
         // 랜덤한 테트리스 블록 생성
-        CreateBlock(LeftBlock, new Vector2(-8, 3.25f + blockHeight));
-        CreateBlock(RightBlock, new Vector2(8, 3.25f + blockHeight));
+        CreateBlock(LeftBlock, new Vector2(-8.25f, 3.25f + blockHeight));
+        CreateBlock(RightBlock, new Vector2(8.25f, 3.25f + blockHeight));
     }
 
     // 타일 생성
