@@ -12,11 +12,24 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D characterRigidbody; // 사용할 리지드바디 컴포넌트 변수
     private Animator animator;  // 사용할 애니메이터 컴포넌트 변수
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         // 게임 오브젝트로부터 사용할 컴포넌트를 가져와 변수에 할당
         characterRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        // 캐릭터 별 시작 위치 설정
+        if (charName == "Ohm")
+            transform.position = new Vector2(-1, -9);
+        else if (charName == "Mho")
+            transform.position = new Vector2(1, -9);
+        else
+            Debug.LogWarning("없는 캐릭터입니다.");
     }
 
     void Update()
