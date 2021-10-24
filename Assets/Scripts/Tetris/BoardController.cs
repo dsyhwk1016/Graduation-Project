@@ -24,7 +24,7 @@ public class BoardController : MonoBehaviour
         // 왼쪽과 오른쪽 보드의 기준 위치 및 보드 크기 설정
         Vector2 leftPos = new Vector3(-8.25f, 3.25f);
         Vector2 rightPos = new Vector3(8.25f, 3.25f);
-        Vector2 boardScale = new Vector3(boardWidth / 2f, boardHeight / 2f);
+        Vector2 boardScale = new Vector3((boardWidth / 2f)+0.5f, boardHeight / 2f);
 
         // 백그라운드 생성
         CreateBoard(new Vector2(0, 3.25f), new Vector2(Screen.width, boardHeight / 2f), backgroundColor);
@@ -36,10 +36,10 @@ public class BoardController : MonoBehaviour
         // 라인 생성
         CreateBoard(new Vector2(0, 3.25f + boardHeight / 4f), new Vector2(Screen.width, 0.1f), lineColor);   // Top
         CreateBoard(new Vector2(0, 3.25f - boardHeight / 4f), new Vector2(Screen.width, 0.1f), lineColor);   // Bottom
-        CreateBoard(new Vector2(-8.25f - boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // L-Left
-        CreateBoard(new Vector2(-8.25f + boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // L-Right
-        CreateBoard(new Vector2(8.25f - boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // R-Left
-        CreateBoard(new Vector2(8.25f + boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // R-Rigt
+        CreateBoard(new Vector2(-8.5f - boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // L-Left
+        CreateBoard(new Vector2(-8f + boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // L-Right
+        CreateBoard(new Vector2(8f - boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // R-Left
+        CreateBoard(new Vector2(8.5f + boardWidth / 4f, 3.25f), new Vector2(0.1f, boardHeight / 2f), lineColor);   // R-Rigt
     }
 
     void CreateBoard(Vector2 position, Vector2 scale, Color color)

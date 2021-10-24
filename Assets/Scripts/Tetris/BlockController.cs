@@ -55,7 +55,7 @@ public class BlockController : MonoBehaviour
             transform.position += new Vector3(0, -tileSize, 0);
 
             // 1칸 하강할 때마다 19점 추가
-            GameManager.instance.AddScore(19);
+            TetrisGameManager.instance.AddScore(19);
 
             // 이동 불가 시 이전 위치, 회전으로 돌아가기
             if (!CanMove())
@@ -63,7 +63,7 @@ public class BlockController : MonoBehaviour
                 transform.position = oldPos;
                 transform.rotation = oldRot;
 
-                GameManager.instance.AddScore(-19); // 추가된 점수 취소
+                TetrisGameManager.instance.AddScore(-19); // 추가된 점수 취소
             }
         }
         else if (isFinish)  // 블록이 착지했으면
@@ -73,7 +73,7 @@ public class BlockController : MonoBehaviour
             {
                 if(child.position.y >= 3 + boardHeight)   // 데드라인을 넘었으면
                 {
-                    GameManager.instance.OnGameOver();  // 게임 오버 실행
+                    TetrisGameManager.instance.OnGameOver();  // 게임 오버 실행
                     break;
                 }
 
@@ -138,7 +138,7 @@ public class BlockController : MonoBehaviour
             transform.position += new Vector3(0, 0.5f, 0);  // 위로 한 칸 이동
 
         // 착지할 때마다 267점 추가
-        GameManager.instance.AddScore(267);
+        TetrisGameManager.instance.AddScore(267);
 
         isFinish = false;   // 착지 여부 초기화
 
@@ -226,7 +226,7 @@ public class BlockController : MonoBehaviour
         }
 
         // 한 줄 삭제 시 2017점 추가
-        GameManager.instance.AddScore(2017);
+        TetrisGameManager.instance.AddScore(2017);
     }
 
     // 줄 내리기 함수
