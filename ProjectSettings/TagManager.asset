@@ -8,6 +8,16 @@ TagManager:
   - Left
   - Right
   - Rotation
+  - LeftButton
+  - RightButton
+  - Caret
+  - Diamond
+  - Circle
+  - Heart
+  - Star
+  - Square
+  - Triangle
+  - X
   layers:
   - Default
   - TransparentFX

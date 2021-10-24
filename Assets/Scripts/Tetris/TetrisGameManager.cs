@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;  // 씬 관리 관련 라이브러리
 using UnityEngine.UI;   // UI 관련 라이브러리
 
-// 게임오버 상태를 표현하고, 게임 점수와 UI를 관리하는 게임 매니저
-public class GameManager : MonoBehaviour
+// 테트리스의 게임오버 상태를 표현하고, 게임 점수와 UI를 관리하는 게임 매니저
+public class TetrisGameManager : MonoBehaviour
 {
-    public static GameManager instance; // 싱글턴을 할당할 전역 변수
+    public static TetrisGameManager instance; // 싱글턴을 할당할 전역 변수
 
     [Header("Editor Object")]
     public Text scoreText;  // 플레이 점수를 출력할 UI 텍스트
