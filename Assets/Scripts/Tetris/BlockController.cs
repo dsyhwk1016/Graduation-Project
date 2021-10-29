@@ -12,6 +12,10 @@ public class BlockController : MonoBehaviour
     [SerializeField]
     private float tileSize = 0.5f; // 유닛 기준 타일의 크기
 
+    [Header("Game Settings")]
+    public AudioClip stopClip;  // 블록 착지 시 재생할 오디오 클립
+    public AudioClip deleteCilp;    // 블록 삭제 시 재생할 오디오 클립
+
     private bool isFinish = false;   // 착지했는지 여부
     private bool xMove = false;  // 좌우 이동 여부
     private float moveCycle = 1.5f;    // 기본 낙하 주기
@@ -19,15 +23,17 @@ public class BlockController : MonoBehaviour
     private float boardHeight;  // 생성된 보드의 높이
     private float boardWidth;   // 생성된 보드의 넓이
     private Tetris tetrisScript;    // 사용할 Tetris 컴포넌트
+    private AudioSource audioSource;    // 사용할 오디오 소스 컴포넌트
 
     void Start()
     {
-        // BoardController 컴포넌트 가져오기
+        // 사용할 컴포넌트 가져와서 변수에 할당
         BoardController tetrisSize = GameObject.FindObjectOfType<BoardController>().GetComponent<BoardController>();
+        audioSource = gameObject.GetComponent<AudioSource>();
 
         // 생성된 보드 크기에 맞춰 블록 위치 제한
         boardHeight = tetrisSize.boardHeight / 4f;
-        boardWidth = tetrisSize.boardWidth / 4f;
+        boardWidth = tetrisSize.boardWidth / 4f - 0.25f;
 
         timeAfterFall = 0f; // 누적 시간 초기화
         // Tetris 컴포넌트를 갖고있는 오브젝트를 찾아 Tetris 컴포넌트 할당
@@ -68,6 +74,10 @@ public class BlockController : MonoBehaviour
         }
         else if (isFinish)  // 블록이 착지했으면
         {
+            // 블록 착지 효과음으로 변경 후 재생
+            audioSource.clip = stopClip;
+            audioSource.Play();
+
             // 현재 오브젝트의 자식 오브젝트를 모두 확인
             foreach (Transform child in transform)
             {
@@ -158,14 +168,14 @@ public class BlockController : MonoBehaviour
             if (gameObject.name == "LeftBlock")
             {
                 // 이동 가능한 좌표인지 확인 후 반환
-                if (x < -8.25f - boardWidth || x > -8.25f + boardWidth)  // 실제 가능 좌표는 -11.25~-5.25
+                if (x < -8.5f - boardWidth || x > -8.5f + boardWidth)  // 실제 가능 좌표는 -11.25~-5.25
                     return false;
             }
 
             if (gameObject.name == "RightBlock")
             {
                 // 이동 가능한 좌표인지 확인 후 반환
-                if (x < 8.25f - boardWidth || x > 8.25f + boardWidth)    // 실제 가능 좌표는 5.25~11.25
+                if (x < 8.5f - boardWidth || x > 8.5f + boardWidth)    // 실제 가능 좌표는 5.25~11.25
                     return false;
             }
 
@@ -225,6 +235,10 @@ public class BlockController : MonoBehaviour
                 Destroy(child.gameObject);  // 해당 오브젝트 삭제
         }
 
+        // 블록 삭제 효과음으로 변경 후 재생
+        audioSource.clip = deleteCilp;
+        audioSource.Play();
+
         // 한 줄 삭제 시 2017점 추가
         TetrisGameManager.instance.AddScore(2017);
     }
@@ -247,5 +261,11 @@ public class BlockController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool IsFinish
+    {
+        set { isFinish = value; }
+        get { return isFinish; }
     }
 }

@@ -10,16 +10,13 @@ public class NoteController : MonoBehaviour
     public Transform noteObj;   // 노트가 생성될 부모 오브젝트
 
     [Header("Game Settings")]
-    public float noteCycle = 1.5f;  // 노트 생성 주기
+    public float noteCycle = 1.4f;  // 노트 생성 주기
 
     private float timeAfterCreate;  // 노트 생성 후 누적시간
 
     void Start()
     {
-        // 첫 노트 생성
-        RandNote(noteObj);
-        
-        timeAfterCreate = 0f;   // 누적시간 초기화
+        timeAfterCreate = 1.1f;   // 누적시간 초기화
     }
 
     void Update()
