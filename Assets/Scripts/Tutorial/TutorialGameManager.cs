@@ -13,7 +13,7 @@ public class TutorialGameManager : MonoBehaviour
     // 튜토리얼 시작 시 활성화 할 오브젝트
     public GameObject leftBtn;
     public GameObject rightBtn;
-    public GameObject life;
+    public GameObject tutorialUI;
 
     [Space(10f)]
     // 튜토리얼 시작 시 비활성화 할 오브젝트
@@ -38,7 +38,7 @@ public class TutorialGameManager : MonoBehaviour
         leftBtn.SetActive(false);
         rightBtn.SetActive(false);
         note.SetActive(false);
-        life.SetActive(false);
+        tutorialUI.SetActive(false);
 
         // instance가 비어있으면 자신의 게임 오브젝트를 할당
         if (instance == null) instance = this;
@@ -66,7 +66,7 @@ public class TutorialGameManager : MonoBehaviour
 
                 // 노트 및 생명 오브젝트 활성화 
                 note.SetActive(true);
-                life.SetActive(true);
+                tutorialUI.SetActive(true);
 
                 GameObject.Find("Judge Line").GetComponent<RhythmRule>().audioSource.Play();    // 음악 재생 
             }

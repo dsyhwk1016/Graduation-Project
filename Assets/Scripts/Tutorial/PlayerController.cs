@@ -13,8 +13,11 @@ public class PlayerController : MonoBehaviour
     public float speed; // 이동 속력
     public string charName; // 캐릭터 이름
 
+    private float playCycle = 0.5f;    // 오디오를 재생할 주기
+    private float timeAfterPlay = 0f;    // 마지막 재생 후 누적시간
     private Rigidbody2D characterRigidbody; // 사용할 리지드바디 컴포넌트 변수
     private Animator animator;  // 사용할 애니메이터 컴포넌트 변수
+    private AudioSource audioSource;    // 사용할 오디오 소스 컴포넌트 변수
 
     void Awake()
     {
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
         // 게임 오브젝트로부터 사용할 컴포넌트를 가져와 변수에 할당
         characterRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // 씬이 로드될 때마다 실행
@@ -79,6 +83,19 @@ public class PlayerController : MonoBehaviour
         Vector2 newVelocity = new Vector2(xInput * speed, yInput * speed);
         // 리지드바디 속도에 newVelocity 할당
         characterRigidbody.velocity = newVelocity;
+
+        // 캐릭터가 움직일 때 특정 시간 간격으로 효과음 반복 재생
+        if (xInput != 0 || yInput != 0)
+        {
+            timeAfterPlay += Time.deltaTime;    // 누적시간 갱신
+            
+            if (timeAfterPlay >= playCycle) // 누적시간이 주기 이상이면
+            {
+                timeAfterPlay = 0;  // 누적시간 초기화
+
+                audioSource.Play(); //오디오 재생
+            }
+        }
 
         //캐릭터가 화면 밖으로 나가지 않도록 월드좌표를 뷰포트로 제한
         Vector3 worldPos = Camera.main.WorldToViewportPoint(transform.position);
