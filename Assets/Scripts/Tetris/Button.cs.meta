@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c273c9219b75043308cf05250b897060
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - btnDownPrefab: {instanceID: 0}
+  - btnLeftPrefab: {instanceID: 0}
+  - btnRightPrefab: {instanceID: 0}
+  - btnRotationPrefab: {instanceID: 0}
+  - LeftButton: {instanceID: 0}
+  - RightButton: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

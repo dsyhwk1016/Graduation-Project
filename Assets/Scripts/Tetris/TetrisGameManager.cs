@@ -49,7 +49,7 @@ public class TetrisGameManager : MonoBehaviour
     {
         if (Input.GetKeyDown("escape") == true)
             Application.Quit();
-
+        
         // 게임오버가 아니면
         if (!isGameover)
         {
