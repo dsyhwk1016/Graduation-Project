@@ -28,7 +28,7 @@ public class BlockController : MonoBehaviour
     void Start()
     {
         // 사용할 컴포넌트 가져와서 변수에 할당
-        BoardController tetrisSize = GameObject.FindObjectOfType<BoardController>().GetComponent<BoardController>();
+        CreateBoard tetrisSize = GameObject.FindObjectOfType<CreateBoard>().GetComponent<CreateBoard>();
         audioSource = gameObject.GetComponent<AudioSource>();
 
         // 생성된 보드 크기에 맞춰 블록 위치 제한
@@ -137,11 +137,7 @@ public class BlockController : MonoBehaviour
     void NewBlockCreate()
     {
         // 새 블록 생성
-        if (gameObject.name == "LeftBlock")
-            tetrisScript.CreateBlock(gameObject.transform, new Vector2(-8.25f, 2.5f + boardHeight));
-        else if (gameObject.name == "RightBlock")
-            tetrisScript.CreateBlock(gameObject.transform, new Vector2(8.25f, 2.5f + boardHeight));
-        else Debug.LogWarning("없는 오브젝트 입니다.");
+        tetrisScript.NewBlock(gameObject.transform);
 
         // 새 블록이 생성될 위치에 이미 블록이 있다면
         if (!CanMove())
