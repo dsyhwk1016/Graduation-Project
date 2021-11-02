@@ -27,6 +27,7 @@ public class TutorialGameManager : MonoBehaviour
 
     private int lifeCnt = 3;   // 튜토리얼 생명
     private bool isGameover = false;    // 게임오버 상태
+    private float quitTime = 0; // 종료 시간
 
     // 게임 시작과 동시에 싱글턴 구성
     void Awake()
@@ -52,6 +53,15 @@ public class TutorialGameManager : MonoBehaviour
 
     void Update()
     {
+        // Joystick의 양쪽 범퍼를 누른채로
+        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5))
+        {
+            quitTime += Time.deltaTime; // 종료 시간 갱신
+
+            if (quitTime > 1.5f) // 종료 시간이 1.5보다 크면
+                Application.Quit(); // 어플리케이션 종료
+        }
+
         // 게임오버가 아닐 때
         if (!isGameover)
         {
