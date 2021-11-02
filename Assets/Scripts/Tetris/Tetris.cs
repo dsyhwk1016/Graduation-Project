@@ -47,13 +47,13 @@ public class Tetris : AllCreate
 
         // 프리뷰 블록 랜덤 생성
         preindex = Random.Range(0, 7);
-        CreateBlock(tilePrefab, preview, new Vector2(0, 1), preindex);
+        CreateBlock(tilePrefab, preview, new Vector2(0, 0.75f), preindex);
 
         // I 블록과 O 블록일 경우 프리뷰 위치 추가 조정
         if(preindex == 0)
-            preview.position += new Vector3(0.25f, -0.5f, 0);
+            preview.position += new Vector3(0.25f, -0.25f, 0);
         else if(preindex == 3)
-            preview.position -= new Vector3(0.25f, 0.25f, 0);
+            preview.position -= new Vector3(0.25f, 0, 0);
     }
 
     // 랜덤 블록 생성
@@ -63,10 +63,10 @@ public class Tetris : AllCreate
         if(parent.name == LeftBlock.name)
             CreateBlock(tilePrefab, parent, new Vector2(-8.25f, blockHeight), preindex);
         else if(parent.name == RightBlock.name)
-            CreateBlock(tilePrefab, parent, new Vector2(8.25f, blockHeight), preindex);
+            CreateBlock(tilePrefab, parent, new Vector2(8.75f, blockHeight), preindex);
         else    // 존재하지 않는 부모 오브젝트일 경우
             Debug.LogWarning("없는 블록입니다.");   // 경고 메시지 출력
-        
+
         // 양쪽 블록이 동시에 착지하지 않는 경우에만
         if (!(leftCtrl.IsFinish && rightCtrl.IsFinish))
             NewPreview();    // 프리뷰 생성

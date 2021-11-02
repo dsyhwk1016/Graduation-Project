@@ -72,8 +72,8 @@ public class PlayerController : MonoBehaviour
         string vAxisName = "Vertical" + charName;
 
         // 수평, 수직 축의 입력값을 감지해 저장
-        float xInput = Input.GetAxis(hAxisName);
-        float yInput = Input.GetAxis(vAxisName);
+        float xInput = Input.GetAxisRaw(hAxisName);
+        float yInput = Input.GetAxisRaw(vAxisName);
 
         // 입력 방향에 따른 애니메이션 파라미터 변경
         animator.SetInteger("GoFront", (int)yInput);

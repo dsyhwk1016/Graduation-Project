@@ -51,31 +51,28 @@ public class AllCreate : MonoBehaviour
         switch (index)
         {
             case 0: // 분홍색(I-Block)
-                parent.position += new Vector3(0, 0.5f, 0); // 위치 조정
                 color = new Color32(239, 115, 196, 255);    // 블록 색상 지정
                 // 블록 모양에 맞춰 타일 생성
-                Create(prefab, parent, new Vector2(-1f, 0.0f), color);
-                Create(prefab, parent, new Vector2(-0.5f, 0.0f), color);
-                Create(prefab, parent, new Vector2(0f, 0.0f), color);
-                Create(prefab, parent, new Vector2(0.5f, 0.0f), color);
+                Create(prefab, parent, new Vector2(-1f, 0.5f), color);
+                Create(prefab, parent, new Vector2(-0.5f, 0.5f), color);
+                Create(prefab, parent, new Vector2(0f, 0.5f), color);
+                Create(prefab, parent, new Vector2(0.5f, 0.5f), color);
                 break;
 
             case 1: // 주황색(J-Block)
-                parent.position -= new Vector3(0, 0.5f, 0);
                 color = new Color32(231, 151, 117, 255);
+                Create(prefab, parent, new Vector2(-0.5f, 0.5f), color);
                 Create(prefab, parent, new Vector2(-0.5f, 0.0f), color);
                 Create(prefab, parent, new Vector2(0f, 0.0f), color);
-                Create(prefab, parent, new Vector2(0f, 0.5f), color);
-                Create(prefab, parent, new Vector2(0f, 1f), color);
+                Create(prefab, parent, new Vector2(0.5f, 0.0f), color);
                 break;
 
             case 2: // 노란색(L-Block)
-                parent.position -= new Vector3(0, 0.5f, 0);
                 color = new Color32(255, 236, 143, 255);
-                Create(prefab, parent, new Vector2(0f, 1f), color);
-                Create(prefab, parent, new Vector2(0f, 0.5f), color);
+                Create(prefab, parent, new Vector2(-0.5f, 0.0f), color);
                 Create(prefab, parent, new Vector2(0f, 0.0f), color);
                 Create(prefab, parent, new Vector2(0.5f, 0.0f), color);
+                Create(prefab, parent, new Vector2(0.5f, 0.5f), color);
                 break;
 
             case 3: // 파란색(O-Block)

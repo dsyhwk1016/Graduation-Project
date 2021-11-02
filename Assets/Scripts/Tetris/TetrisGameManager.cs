@@ -31,6 +31,7 @@ public class TetrisGameManager : MonoBehaviour
     private bool isGameover = false; // 게임오버 상태
     private int score = 0;  // 플레이 점수
     private float surviveTime = 0;  // 생존 시간
+    private float quitTime = 0; // 종료 시간
     
     // 게임 시작과 동시에 싱글턴 구성
     void Awake()
@@ -47,8 +48,14 @@ public class TetrisGameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("escape") == true)
-            Application.Quit();
+        // Joystick의 양쪽 범퍼를 누른채로
+        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5))
+        {
+            quitTime += Time.deltaTime; // 종료 시간 갱신
+
+            if(quitTime > 1.5f) // 종료 시간이 1.5보다 크면
+                Application.Quit(); // 어플리케이션 종료
+        }
 
         // 게임오버가 아니면
         if (!isGameover)
