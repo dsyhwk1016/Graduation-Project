@@ -51,6 +51,7 @@ public class AllCreate : MonoBehaviour
         switch (index)
         {
             case 0: // 분홍색(I-Block)
+                parent.position += new Vector3(0f, 0.5f, 0f);   // 위치 조정
                 color = new Color32(239, 115, 196, 255);    // 블록 색상 지정
                 // 블록 모양에 맞춰 타일 생성
                 Create(prefab, parent, new Vector2(-1f, 0.5f), color);
