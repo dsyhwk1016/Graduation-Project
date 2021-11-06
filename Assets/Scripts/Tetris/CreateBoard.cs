@@ -31,19 +31,19 @@ public class CreateBoard : AllCreate
         Vector2 preScale = new Vector2(3, 3);   // 프리뷰 크기
 
         // 백그라운드 및 라인 생성
-        Create(boardPrefab, transform, boardPos, lineColor, new Vector2(Screen.width, boardHeight / 2f + 0.2f));
-        Create(boardPrefab, transform, boardPos, backgroundColor, new Vector2(Screen.width, boardHeight / 2f));
+        Create(boardPrefab, transform, boardPos, lineColor, new Vector2(Screen.width, boardHeight / 2f + 0.2f), 0);
+        Create(boardPrefab, transform, boardPos, backgroundColor, new Vector2(Screen.width, boardHeight / 2f), 0);
 
         boardPos.x = xOffset;   // 오프셋으로 보드 위치 설정
 
         // 라인 생성
-        Create(boardPrefab, transform, -1 * boardPos, lineColor, boardScale + new Vector2(0.2f, 0.2f)); // 왼쪽 보드 라인
-        Create(boardPrefab, transform, boardPos, lineColor, boardScale + new Vector2(0.2f, 0.2f));  // 오른쪽 보드 라인
-        Create(boardPrefab, transform, prePos, lineColor, preScale + new Vector2(0.2f, 0.2f));  // 프리뷰 라인
+        Create(boardPrefab, transform, -1 * boardPos, lineColor, boardScale + new Vector2(0.2f, 0.2f), 0); // 왼쪽 보드 라인
+        Create(boardPrefab, transform, boardPos, lineColor, boardScale + new Vector2(0.2f, 0.2f), 0);  // 오른쪽 보드 라인
+        Create(boardPrefab, transform, prePos, lineColor, preScale + new Vector2(0.2f, 0.2f), 0);  // 프리뷰 라인
 
         // 보드 생성
-        Create(boardPrefab, transform, -1 * boardPos, boardColor, boardScale);  // 왼쪽 게임 보드
-        Create(boardPrefab, transform, boardPos, boardColor, boardScale);   // 오른쪽 게임 보드
-        Create(boardPrefab, transform, prePos, boardColor, preScale);   // 프리뷰 보드
+        Create(boardPrefab, transform, -1 * boardPos, boardColor, boardScale, 0);  // 왼쪽 게임 보드
+        Create(boardPrefab, transform, boardPos, boardColor, boardScale, 0);   // 오른쪽 게임 보드
+        Create(boardPrefab, transform, prePos, boardColor, preScale, 0);   // 프리뷰 보드
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;  // 씬 관리 관련 라이브러리
 using UnityEngine.UI;   // UI 관련 라이브러리
 
 // 테트리스의 게임오버 상태를 표현하고, 게임 점수와 UI를 관리하는 게임 매니저
-public class TetrisGameManager : MonoBehaviour
+// Fade 클래스를 상속받아 페이드 인, 페이드 아웃 구현
+public class TetrisGameManager : Fade
 {
     public static TetrisGameManager instance; // 싱글턴을 할당할 전역 변수
 
@@ -31,6 +32,7 @@ public class TetrisGameManager : MonoBehaviour
     private bool isGameover = false; // 게임오버 상태
     private int score = 0;  // 플레이 점수
     private float surviveTime = 0;  // 생존 시간
+    private float quitTime = 0; // 종료 시간
     
     // 게임 시작과 동시에 싱글턴 구성
     void Awake()
@@ -43,12 +45,27 @@ public class TetrisGameManager : MonoBehaviour
             Debug.LogWarning("씬에 두 개 이상의 게임 매니저가 존재합니다.");  // 경고 메시지 출력 후
             Destroy(gameObject);    // 자신의 게임 오브젝트를 파괴
         }
+
+        playFade = 1;   // 페이드 인
     }
 
-    void Update()
+    // Fade의 Update() 재정의
+    protected override void Update()
     {
-        if (Input.GetKeyDown("escape") == true)
-            Application.Quit();
+        base.Update();  // Fade의 Update() 호출
+
+        // Joystick의 양쪽 범퍼를 모두 누르고 있을 때
+        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5))
+        {
+            quitTime += Time.deltaTime; // 종료 시간 갱신
+
+            if (quitTime > 1.5f)    // 종료 시간이 1.5보다 크면
+            {
+                playFade = -1;  // 페이드 아웃
+                base.Update();  // Fade의 Update() 호출
+                Application.Quit(); // 어플리케이션 종료
+            }
+        }
 
         // 게임오버가 아니면
         if (!isGameover)

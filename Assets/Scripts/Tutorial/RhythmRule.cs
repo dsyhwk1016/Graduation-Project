@@ -26,8 +26,8 @@ public class RhythmRule : MonoBehaviour
 
     void Update()
     {
-        // 오디오가 재생 중이고 Space 키를 눌렀으면
-        if (audioSource.isPlaying == true && Input.GetKeyDown(KeyCode.Space) == true)
+        // 오디오가 재생 중이고 Joystick의 START 키를 눌렀으면
+        if (audioSource.isPlaying && Input.GetKeyDown(KeyCode.JoystickButton10))
             TutorialGameManager.instance.OnGameOver();  // 게임오버 실행(튜토리얼 스킵)
 
         // 오디오의 현재 재생시간이 총 길이 이상일 때

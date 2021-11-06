@@ -10,9 +10,8 @@ public class NoteController : AllCreate
     public GameObject[] noteList;   // 사용할 노트 프리팹 배열
     public Transform noteObj;   // 노트가 생성될 부모 오브젝트
 
-    [Header("Game Settings")]
-    public float noteCycle = 1.4f;  // 노트 생성 주기
-
+    private int count = 0;  // 생성된 노트 개수
+    private float noteCycle = 1.6f;  // 노트 생성 주기
     private float timeAfterCreate;  // 노트 생성 후 누적시간
 
     void Start()
@@ -25,9 +24,10 @@ public class NoteController : AllCreate
         timeAfterCreate += Time.deltaTime;  // 누적시간 갱신
 
         // 누적시간이 주기 이상일 때
-        if(timeAfterCreate >= noteCycle)
+        if(timeAfterCreate >= noteCycle && count < 16)
         {
             Create(noteList, noteObj);  // 랜덤 노트 생성
+            count++;
             timeAfterCreate = 0f;   // 누적시간 리셋
         }
     }
